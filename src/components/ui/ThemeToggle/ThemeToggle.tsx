@@ -4,7 +4,7 @@ import './ThemeToggle.scss';
 function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
-  const label = isDark ? 'Activate light theme' : 'Activate dark theme';
+  const label = isDark ? 'Ativar tema claro' : 'Ativar tema escuro';
 
   return (
     <button
