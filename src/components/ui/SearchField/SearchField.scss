@@ -1,0 +1,27 @@
+.search-field {
+  width: 100%;
+
+  input[type='search']::-webkit-search-decoration,
+  input[type='search']::-webkit-search-cancel-button {
+    appearance: none;
+  }
+
+  &__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: var(--space-1);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-text-muted);
+    border-radius: var(--radius-sm);
+  }
+
+  button.search-field__action:hover:not(:disabled) {
+    color: var(--color-primary);
+    background-color: var(--color-primary-soft);
+  }
+}

@@ -78,7 +78,11 @@ export async function http<T>(path: string, options: RequestOptions = {}): Promi
       headers,
       body: body === undefined ? undefined : JSON.stringify(body),
     });
-  } catch {
+  } catch (error) {
+    if (isAbortError(error)) {
+      throw error;
+    }
+
     throw new ApiError(0, 'NETWORK_ERROR', 'Não foi possível conectar ao servidor.');
   }
 
@@ -93,4 +97,8 @@ export async function http<T>(path: string, options: RequestOptions = {}): Promi
   }
 
   return parsed as T;
+}
+
+export function isAbortError(error: unknown): boolean {
+  return error instanceof DOMException && error.name === 'AbortError';
 }

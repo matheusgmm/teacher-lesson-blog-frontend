@@ -15,6 +15,11 @@
     font-size: var(--font-size-display);
   }
 
+  p {
+    color: var(--color-text-muted);
+    max-width: 42rem;
+  }
+
   strong {
     color: var(--color-text);
     font-weight: 600;

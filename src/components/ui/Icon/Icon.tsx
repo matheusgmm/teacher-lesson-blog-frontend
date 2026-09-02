@@ -9,7 +9,11 @@ export type IconName =
   | 'logout'
   | 'menu'
   | 'close'
-  | 'panel';
+  | 'panel'
+  | 'search'
+  | 'calendar'
+  | 'chevronLeft'
+  | 'chevronRight';
 
 type IconProps = {
   name: IconName;
@@ -24,6 +28,10 @@ const PATHS: Record<IconName, string> = {
   menu: 'M4 7h16M4 12h16M4 17h16',
   close: 'M6 6l12 12M18 6L6 18',
   panel: 'M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2zm7-2v16',
+  search: 'M11 19a8 8 0 100-16 8 8 0 000 16zM21 21l-4.3-4.3',
+  calendar: 'M7 4v3M17 4v3M5 9h14M6 6h12a1 1 0 011 1v12a1 1 0 01-1 1H6a1 1 0 01-1-1V7a1 1 0 011-1z',
+  chevronLeft: 'M14 6l-6 6 6 6',
+  chevronRight: 'M10 6l6 6-6 6',
 };
 
 function Icon({ name, className, ...rest }: IconProps) {
