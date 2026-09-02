@@ -1,35 +1,58 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import BrandLogo from '@/components/ui/BrandLogo/BrandLogo';
+import Button from '@/components/ui/Button/Button';
 import ThemeToggle from '@/components/ui/ThemeToggle/ThemeToggle';
-import logo from '@/assets/logo-codice.png';
+import { useAuth } from '@/hooks/useAuth';
 import './Header.scss';
 
 type HeaderProps = {
   title?: string;
 };
 
-const Header: React.FC<HeaderProps> = ({ title }: HeaderProps) => {
+function Header({ title }: HeaderProps) {
   const pageTitle = title?.trim();
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+  const [isLeaving, setIsLeaving] = useState(false);
+
+  async function handleLogout() {
+    setIsLeaving(true);
+
+    try {
+      await logout();
+      navigate('/login', { replace: true });
+    } finally {
+      setIsLeaving(false);
+    }
+  }
 
   return (
     <header className="header">
-      <div className="header__brand">
-        <img
-          src={logo}
-          alt=""
-          className="header__logo"
-          width={44}
-          height={44}
-        />
-        <div className="header__identity">
-          <p className="header__name">Portal Acadêmico</p>
-          <p className="header__tagline">Full Stack Development</p>
-        </div>
+      <BrandLogo to="/" size="md" />
+
+      {pageTitle ? <p className="header__page">{pageTitle}</p> : null}
+
+      <div className="header__actions">
+        {isAuthenticated && user ? (
+          <div className="header__session">
+            <p className="header__user" title={user.email}>
+              {user.name}
+            </p>
+            <Button
+              variant="ghost"
+              onClick={handleLogout}
+              loading={isLeaving}
+              aria-label="Sair da conta"
+            >
+              Sair
+            </Button>
+          </div>
+        ) : null}
+        <ThemeToggle />
       </div>
-
-      { pageTitle ? <p className="header__page">{ pageTitle }</p> : null }
-
-      <ThemeToggle />
     </header>
   );
-};
+}
 
 export default Header;

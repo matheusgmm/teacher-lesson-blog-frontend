@@ -12,44 +12,6 @@
   border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
 
-  &__brand {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    min-width: 0;
-  }
-
-  &__logo {
-    flex-shrink: 0;
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: var(--radius-sm);
-    object-fit: cover;
-  }
-
-  &__identity {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-    min-width: 0;
-  }
-
-  &__name {
-    font-family: var(--font-serif);
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    color: var(--color-text);
-    line-height: 1.2;
-    white-space: nowrap;
-  }
-
-  &__tagline {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-  }
-
   &__page {
     display: none;
     margin-inline: auto;
@@ -58,16 +20,42 @@
     letter-spacing: 0.02em;
     text-transform: capitalize;
   }
-}
 
-@media (max-width: 479px) {
-  .header__tagline {
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  &__session {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  &__user {
     display: none;
+    max-width: 12rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .button {
+    min-height: 2.5rem;
+    padding-inline: var(--space-4);
+    font-size: var(--font-size-sm);
   }
 }
 
 @media (min-width: 768px) {
   .header__page {
+    display: block;
+  }
+
+  .header__user {
     display: block;
   }
 }
