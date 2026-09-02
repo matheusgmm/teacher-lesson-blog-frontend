@@ -5,3 +5,35 @@
   background-color: var(--color-bg);
   color: var(--color-text);
 }
+
+.app-frame {
+  min-height: 100svh;
+  display: flex;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+
+  &__shell {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 100svh;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -4rem;
+  z-index: 300;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 600;
+  text-decoration: none;
+
+  &:focus {
+    top: var(--space-4);
+  }
+}

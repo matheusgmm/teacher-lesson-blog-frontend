@@ -1,56 +1,39 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import BrandLogo from '@/components/ui/BrandLogo/BrandLogo';
-import Button from '@/components/ui/Button/Button';
+import Icon from '@/components/ui/Icon/Icon';
 import ThemeToggle from '@/components/ui/ThemeToggle/ThemeToggle';
 import { useAuth } from '@/hooks/useAuth';
+import { useSidebar } from '@/hooks/useSidebar';
+import { getHomePath, getTitleForPath } from '@/navigation/nav';
+import { useLocation } from 'react-router-dom';
 import './Header.scss';
 
-type HeaderProps = {
-  title?: string;
-};
-
-function Header({ title }: HeaderProps) {
-  const pageTitle = title?.trim();
-  const { user, isAuthenticated, logout } = useAuth();
-  const navigate = useNavigate();
-  const [isLeaving, setIsLeaving] = useState(false);
-
-  async function handleLogout() {
-    setIsLeaving(true);
-
-    try {
-      await logout();
-      navigate('/login', { replace: true });
-    } finally {
-      setIsLeaving(false);
-    }
-  }
+function Header() {
+  const location = useLocation();
+  const { user } = useAuth();
+  const { isDesktop, mobileOpen, openMobile } = useSidebar();
+  const title = getTitleForPath(location.pathname);
+  const homePath = user ? getHomePath(user.role) : '/posts';
 
   return (
     <header className="header">
-      <BrandLogo to="/" size="md" />
+      {!isDesktop ? (
+        <button
+          type="button"
+          className="header__menu"
+          onClick={openMobile}
+          aria-label="Abrir menu"
+          aria-expanded={mobileOpen}
+          aria-controls="navegacao-principal"
+        >
+          <Icon name="menu" />
+        </button>
+      ) : null}
 
-      {pageTitle ? <p className="header__page">{pageTitle}</p> : null}
+      {!isDesktop ? <BrandLogo to={homePath} size="sm" showTagline={false} /> : null}
 
-      <div className="header__actions">
-        {isAuthenticated && user ? (
-          <div className="header__session">
-            <p className="header__user" title={user.email}>
-              {user.name}
-            </p>
-            <Button
-              variant="ghost"
-              onClick={handleLogout}
-              loading={isLeaving}
-              aria-label="Sair da conta"
-            >
-              Sair
-            </Button>
-          </div>
-        ) : null}
-        <ThemeToggle />
-      </div>
+      <h1 className="header__title">{title}</h1>
+
+      <ThemeToggle />
     </header>
   );
 }

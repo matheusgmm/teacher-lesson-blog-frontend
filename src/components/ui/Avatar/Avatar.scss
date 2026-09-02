@@ -1,0 +1,32 @@
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+
+  &--sm {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.7rem;
+  }
+
+  &--md {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.8rem;
+  }
+
+  &--admin {
+    color: var(--color-accent);
+    background-color: var(--color-accent-soft);
+  }
+
+  &--user {
+    color: var(--color-primary);
+    background-color: var(--color-primary-soft);
+  }
+}

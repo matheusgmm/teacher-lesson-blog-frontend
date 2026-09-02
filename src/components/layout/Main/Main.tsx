@@ -5,8 +5,12 @@ type MainProps = {
   children?: ReactNode;
 };
 
-const Main: React.FC<MainProps> = ({ children }: MainProps) => {
-  return <main className="main">{children}</main>;
-};
+function Main({ children }: MainProps) {
+  return (
+    <main id="conteudo" className="main" tabIndex={-1}>
+      {children}
+    </main>
+  );
+}
 
 export default Main;

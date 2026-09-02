@@ -93,7 +93,11 @@
   --layout-max-width: 72rem;
   --header-height: 4.5rem;
   --footer-height: auto;
+  --sidebar-width: 16.75rem;
+  --sidebar-width-collapsed: 4.75rem;
   --z-header: 100;
+  --z-overlay: 110;
+  --z-sidebar: 120;
 }
 
 [data-theme='light'] {

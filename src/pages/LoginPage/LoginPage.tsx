@@ -7,6 +7,7 @@ import Checkbox from '@/components/ui/Checkbox/Checkbox';
 import PasswordField from '@/components/ui/PasswordField/PasswordField';
 import TextField from '@/components/ui/TextField/TextField';
 import { useAuth } from '@/hooks/useAuth';
+import { getHomePath } from '@/navigation/nav';
 import { toAuthErrorMessage } from '@/utils/auth-errors';
 import { normalizeEmail, validateEmail, validatePassword } from '@/utils/validation';
 import './LoginPage.scss';
@@ -65,12 +66,12 @@ function LoginPage() {
     setIsSubmitting(true);
 
     try {
-      await login({
+      const sessionUser = await login({
         email: normalizeEmail(email),
         password,
         rememberMe,
       });
-      navigate(locationState.from || '/', { replace: true });
+      navigate(locationState.from || getHomePath(sessionUser.role), { replace: true });
     } catch (error) {
       setApiError(toAuthErrorMessage(error));
     } finally {

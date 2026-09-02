@@ -30,6 +30,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     saveSession(session, payload.rememberMe);
     setUser(session.user);
     setToken(session.token);
+    return session.user;
   }, []);
 
   const register = useCallback(async (payload: RegisterPayload) => {
