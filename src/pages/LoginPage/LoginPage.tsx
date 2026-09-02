@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useState, type SubmitEvent } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthLayout from '@/components/auth/AuthLayout/AuthLayout';
 import Alert from '@/components/ui/Alert/Alert';
@@ -51,7 +51,7 @@ function LoginPage() {
     };
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const nextErrors = validate();
