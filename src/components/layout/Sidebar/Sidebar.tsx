@@ -128,7 +128,9 @@ function Sidebar() {
                   className={({ isActive }) => {
                     const active = item.to === '/posts'
                       ? isActive || /^\/posts\/\d+$/.test(location.pathname)
-                      : isActive;
+                      : item.to === '/users'
+                        ? isActive || location.pathname.startsWith('/users/')
+                        : isActive;
 
                     return `sidebar__link${active ? ' is-active' : ''}`;
                   }}

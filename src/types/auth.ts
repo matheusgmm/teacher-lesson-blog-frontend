@@ -25,3 +25,23 @@ export type AuthSession = {
   user: User;
   token: string;
 };
+
+export type ListUsersParams = {
+  search?: string;
+  page?: number;
+  limit?: number;
+};
+
+export type CreateUserPayload = {
+  name: string;
+  email: string;
+  password: string;
+  role?: UserRole;
+};
+
+export type UpdateUserPayload = {
+  name?: string;
+  email?: string;
+  password?: string;
+  role?: UserRole;
+};

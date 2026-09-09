@@ -3,9 +3,11 @@ import AppLayout from '@/components/layout/AppLayout/AppLayout';
 import HomePage from '@/pages/HomePage/HomePage';
 import LoginPage from '@/pages/LoginPage/LoginPage';
 import NewPostPage from '@/pages/NewPostPage/NewPostPage';
+import NewUserPage from '@/pages/NewUserPage/NewUserPage';
 import PostDetailPage from '@/pages/PostDetailPage/PostDetailPage';
 import PostsPage from '@/pages/PostsPage/PostsPage';
 import RegisterPage from '@/pages/RegisterPage/RegisterPage';
+import UserDetailPage from '@/pages/UserDetailPage/UserDetailPage';
 import UsersPage from '@/pages/UsersPage/UsersPage';
 import GuestRoute from '@/routes/GuestRoute';
 import ProtectedRoute from '@/routes/ProtectedRoute';
@@ -27,6 +29,8 @@ function AppRoutes() {
           <Route element={<RoleRoute roles={['ADMIN']} />}>
             <Route path="/posts/new" element={<NewPostPage />} />
             <Route path="/users" element={<UsersPage />} />
+            <Route path="/users/new" element={<NewUserPage />} />
+            <Route path="/users/:id" element={<UserDetailPage />} />
           </Route>
 
           <Route path="/posts/:id" element={<PostDetailPage />} />

@@ -52,3 +52,14 @@ export function clearSession() {
 export function getStoredToken(): string | null {
   return loadSession()?.token ?? null;
 }
+
+export function updateStoredUser(user: User) {
+  const persist = window.localStorage.getItem(PERSIST_KEY) === '1';
+  const store = persist ? window.localStorage : window.sessionStorage;
+
+  if (!store.getItem(TOKEN_KEY)) {
+    return;
+  }
+
+  store.setItem(USER_KEY, JSON.stringify(user));
+}

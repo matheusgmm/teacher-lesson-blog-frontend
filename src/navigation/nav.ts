@@ -62,6 +62,14 @@ export function getTitleForPath(pathname: string): string {
     return 'Aula';
   }
 
+  if (pathname === '/users/new') {
+    return 'Nova pessoa';
+  }
+
+  if (/^\/users\/\d+$/.test(pathname)) {
+    return 'Pessoa';
+  }
+
   const exact = NAV_ITEMS.find((item) => item.to === pathname);
 
   if (exact) {

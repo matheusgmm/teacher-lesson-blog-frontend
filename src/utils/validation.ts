@@ -61,6 +61,14 @@ export function validatePasswordConfirm(
   return undefined;
 }
 
+export function validateOptionalPassword(password: string): string | undefined {
+  if (!password) {
+    return undefined;
+  }
+
+  return validatePassword(password);
+}
+
 export function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
 }

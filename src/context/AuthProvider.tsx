@@ -3,7 +3,7 @@ import * as authApi from '@/api/auth.api';
 import { setUnauthorizedHandler } from '@/api/http-client';
 import { AuthContext } from '@/context/auth-context';
 import type { LoginPayload, RegisterPayload, User } from '@/types/auth';
-import { clearSession, loadSession, saveSession } from '@/utils/auth-storage';
+import { clearSession, loadSession, saveSession, updateStoredUser } from '@/utils/auth-storage';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => loadSession()?.user ?? null);
@@ -47,6 +47,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [resetSession]);
 
+  const updateSessionUser = useCallback((nextUser: User) => {
+    setUser(nextUser);
+    updateStoredUser(nextUser);
+  }, []);
+
   const value = useMemo(
     () => ({
       user,
@@ -55,8 +60,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       login,
       register,
       logout,
+      updateSessionUser,
     }),
-    [user, token, login, register, logout],
+    [user, token, login, register, logout, updateSessionUser],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
