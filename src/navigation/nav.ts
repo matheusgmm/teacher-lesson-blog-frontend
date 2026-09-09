@@ -58,6 +58,10 @@ export function getHomePath(role: UserRole): string {
 }
 
 export function getTitleForPath(pathname: string): string {
+  if (/^\/posts\/\d+\/edit$/.test(pathname)) {
+    return 'Editar aula';
+  }
+
   if (/^\/posts\/\d+$/.test(pathname)) {
     return 'Aula';
   }

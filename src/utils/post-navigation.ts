@@ -7,5 +7,9 @@ export function resolvePostsBackPath(from: unknown): string {
     return '/posts';
   }
 
+  if (/^\/posts\/\d+\/edit/.test(from)) {
+    return '/posts';
+  }
+
   return from;
 }

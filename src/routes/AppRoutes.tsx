@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import AppLayout from '@/components/layout/AppLayout/AppLayout';
+import EditPostPage from '@/pages/EditPostPage/EditPostPage';
 import HomePage from '@/pages/HomePage/HomePage';
 import LoginPage from '@/pages/LoginPage/LoginPage';
 import NewPostPage from '@/pages/NewPostPage/NewPostPage';
@@ -28,6 +29,7 @@ function AppRoutes() {
 
           <Route element={<RoleRoute roles={['ADMIN']} />}>
             <Route path="/posts/new" element={<NewPostPage />} />
+            <Route path="/posts/:id/edit" element={<EditPostPage />} />
             <Route path="/users" element={<UsersPage />} />
             <Route path="/users/new" element={<NewUserPage />} />
             <Route path="/users/:id" element={<UserDetailPage />} />

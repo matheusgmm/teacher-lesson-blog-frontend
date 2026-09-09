@@ -69,6 +69,14 @@ export function validateOptionalPassword(password: string): string | undefined {
   return validatePassword(password);
 }
 
+export function validateCurrentPassword(password: string): string | undefined {
+  if (!password) {
+    return 'Informe a senha atual.';
+  }
+
+  return undefined;
+}
+
 export function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
 }

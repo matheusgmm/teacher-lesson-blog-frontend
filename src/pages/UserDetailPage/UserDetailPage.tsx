@@ -18,6 +18,7 @@ import { toUserErrorMessage } from '@/utils/user-errors';
 import { resolveUsersBackPath } from '@/utils/user-navigation';
 import {
   normalizeEmail,
+  validateCurrentPassword,
   validateEmail,
   validateName,
   validateOptionalPassword,
@@ -30,7 +31,7 @@ type LocationState = {
   created?: boolean;
 };
 
-type EditField = 'name' | 'email' | 'password' | 'confirmPassword';
+type EditField = 'name' | 'email' | 'currentPassword' | 'password' | 'confirmPassword';
 type EditErrors = Partial<Record<EditField, string>>;
 
 function parseUserId(value: string | undefined): number | null {
@@ -54,6 +55,7 @@ function UserDetailPage() {
   const [role, setRole] = useState<UserRole>('USER');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
   const [errors, setErrors] = useState<EditErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [success, setSuccess] = useState(locationState.created ? 'created' : null);
@@ -68,6 +70,7 @@ function UserDetailPage() {
     setRole(user.role);
     setPassword('');
     setConfirmPassword('');
+    setCurrentPassword('');
     setErrors({});
     setFormError(null);
     setConfirmingDelete(false);
@@ -91,6 +94,9 @@ function UserDetailPage() {
     return {
       name: validateName(name),
       email: validateEmail(email),
+      currentPassword: isSelf && password
+        ? validateCurrentPassword(currentPassword)
+        : undefined,
       password: validateOptionalPassword(password),
       confirmPassword: password
         ? validatePasswordConfirm(password, confirmPassword)
@@ -109,6 +115,7 @@ function UserDetailPage() {
     const hasError = Boolean(
       nextErrors.name
       || nextErrors.email
+      || nextErrors.currentPassword
       || nextErrors.password
       || nextErrors.confirmPassword,
     );
@@ -130,6 +137,10 @@ function UserDetailPage() {
 
     if (password) {
       payload.password = password;
+
+      if (isSelf) {
+        payload.currentPassword = currentPassword;
+      }
     }
 
     setIsSaving(true);
@@ -144,6 +155,7 @@ function UserDetailPage() {
       setRole(nextUser.role);
       setPassword('');
       setConfirmPassword('');
+      setCurrentPassword('');
       setSuccess('updated');
 
       if (isSelf) {
@@ -318,6 +330,23 @@ function UserDetailPage() {
             setSuccess(null);
           }}
         />
+
+        {isSelf && password ? (
+          <PasswordField
+            id="user-current-password"
+            name="currentPassword"
+            label="Senha atual"
+            value={currentPassword}
+            autoComplete="current-password"
+            disabled={isSaving || isDeleting}
+            error={errors.currentPassword}
+            onChange={(value) => {
+              setCurrentPassword(value);
+              clearFieldError('currentPassword');
+              setSuccess(null);
+            }}
+          />
+        ) : null}
 
         {password ? (
           <PasswordField

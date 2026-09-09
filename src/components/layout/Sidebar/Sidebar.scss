@@ -176,7 +176,8 @@
 
   &--compact &__label,
   &--compact &__user-copy,
-  &--compact &__hint {
+  &--compact &__hint,
+  &--compact &__profile-action {
     display: none;
   }
 
@@ -243,11 +244,51 @@
     padding: var(--space-2);
   }
 
+  &--compact &__profile {
+    justify-content: center;
+  }
+
   &__user-main {
     display: flex;
     align-items: center;
     gap: var(--space-3);
     min-width: 0;
+  }
+
+  &__profile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+    flex: 1;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      outline: none;
+
+      .sidebar__profile-action {
+        color: var(--color-primary);
+      }
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 3px var(--color-primary-soft);
+    }
+  }
+
+  &__profile-action {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
   }
 
   &__user-copy {

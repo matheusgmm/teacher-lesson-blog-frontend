@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import PostCard from '@/components/posts/PostCard/PostCard';
 import Alert from '@/components/ui/Alert/Alert';
 import DateRangePicker from '@/components/ui/DateRangePicker/DateRangePicker';
@@ -33,6 +33,8 @@ function emptyDescription(search: string, hasDates: boolean): string {
 
 function PostsPage() {
   const { user } = useAuth();
+  const location = useLocation();
+  const deletedTitle = (location.state as { deletedTitle?: string } | null)?.deletedTitle;
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('search') ?? '';
   const from = readIsoDateParam(searchParams.get('from'));
@@ -168,6 +170,10 @@ function PostsPage() {
           A busca olha título e descrição. O calendário filtra pela data de publicação. A lista atualiza sozinha.
         </p>
       </div>
+
+      {deletedTitle ? (
+        <Alert variant="success">“{deletedTitle}” foi removida da lista.</Alert>
+      ) : null}
 
       {error ? <Alert variant="error">{error}</Alert> : null}
 

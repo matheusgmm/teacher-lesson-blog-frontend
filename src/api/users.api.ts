@@ -32,6 +32,14 @@ export function createUser(payload: CreateUserPayload, signal?: AbortSignal) {
   });
 }
 
+export function updateMe(payload: UpdateUserPayload, signal?: AbortSignal) {
+  return http<ApiSuccess<User>>('/api/user', {
+    method: 'PATCH',
+    body: payload,
+    signal,
+  });
+}
+
 export function updateUser(id: number, payload: UpdateUserPayload, signal?: AbortSignal) {
   return http<ApiSuccess<User>>(`/api/user/${id}`, {
     method: 'PATCH',

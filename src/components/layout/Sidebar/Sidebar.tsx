@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import PasswordChangeModal from '@/components/auth/PasswordChangeModal/PasswordChangeModal';
 import BrandLogo from '@/components/ui/BrandLogo/BrandLogo';
 import Avatar from '@/components/ui/Avatar/Avatar';
 import Icon from '@/components/ui/Icon/Icon';
@@ -24,6 +25,7 @@ function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [isLeaving, setIsLeaving] = useState(false);
+  const [passwordOpen, setPasswordOpen] = useState(false);
 
   const compact = collapsed && !peeking;
   const items = user ? getNavItemsForRole(user.role) : [];
@@ -127,7 +129,7 @@ function Sidebar() {
                   end={item.end}
                   className={({ isActive }) => {
                     const active = item.to === '/posts'
-                      ? isActive || /^\/posts\/\d+$/.test(location.pathname)
+                      ? isActive || /^\/posts\/\d+(\/edit)?$/.test(location.pathname)
                       : item.to === '/users'
                         ? isActive || location.pathname.startsWith('/users/')
                         : isActive;
@@ -158,7 +160,17 @@ function Sidebar() {
         ) : null}
 
         <div className="sidebar__user">
-          <div className="sidebar__user-main">
+          <button
+            type="button"
+            className="sidebar__profile"
+            onClick={() => {
+              dismissFlyouts();
+              setPasswordOpen(true);
+            }}
+            aria-haspopup="dialog"
+            aria-label={`Alterar senha de ${user.name}`}
+            title="Alterar senha"
+          >
             <Avatar name={user.name} role={user.role} />
             <div className="sidebar__user-copy">
               <p className="sidebar__user-name">{user.name}</p>
@@ -166,8 +178,9 @@ function Sidebar() {
               <span className={`sidebar__role sidebar__role--${user.role.toLowerCase()}`}>
                 {getRoleLabel(user.role)}
               </span>
+              <span className="sidebar__profile-action">Alterar senha</span>
             </div>
-          </div>
+          </button>
 
           <button
             type="button"
@@ -181,6 +194,10 @@ function Sidebar() {
           </button>
         </div>
       </aside>
+
+      {passwordOpen ? (
+        <PasswordChangeModal onClose={() => setPasswordOpen(false)} />
+      ) : null}
     </>
   );
 }

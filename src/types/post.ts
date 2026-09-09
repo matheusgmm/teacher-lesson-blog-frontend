@@ -29,3 +29,8 @@ export type CreatePostPayload = {
   title: string;
   description: string;
 };
+
+export type UpdatePostPayload = {
+  title?: string;
+  description?: string;
+};

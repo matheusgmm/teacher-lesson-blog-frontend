@@ -5,6 +5,8 @@ const USER_ERROR_MESSAGES: Record<string, string> = {
   EMAIL_ALREADY_EXISTS: 'Este e-mail já está cadastrado.',
   USER_NOT_FOUND: 'Esta pessoa não está disponível.',
   INVALID_ROLE: 'Escolha um perfil válido.',
+  CURRENT_PASSWORD_REQUIRED: 'Informe a senha atual.',
+  CURRENT_PASSWORD_INVALID: 'A senha atual não confere.',
   FORBIDDEN: 'Esta ação não é permitida.',
   NETWORK_ERROR: 'Não foi possível conectar ao servidor. Confira se a API está em execução.',
 };
