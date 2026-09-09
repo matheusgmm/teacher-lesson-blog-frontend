@@ -1,0 +1,146 @@
+.post-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 46rem;
+}
+
+.post-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: fit-content;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  .icon {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+}
+
+.post-detail__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.post-detail__kicker {
+  color: var(--color-accent);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.post-detail__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.post-detail__title {
+  flex: 1;
+  min-width: 12rem;
+  font-size: var(--font-size-display);
+}
+
+.post-detail__status {
+  flex-shrink: 0;
+  margin-top: 0.45rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background-color: var(--color-accent-soft);
+}
+
+.post-detail__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+
+  span:first-child {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+}
+
+.post-detail__body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.post-detail__hint {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.post-detail__skeleton {
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-surface-muted) 0%,
+      var(--color-surface) 50%,
+      var(--color-surface-muted) 100%
+    );
+  background-size: 200% 100%;
+  animation: post-detail-shimmer 1.2s ease-in-out infinite;
+  border: 1px solid var(--color-border);
+
+  &--title {
+    height: 2.5rem;
+    max-width: 28rem;
+  }
+
+  &--meta {
+    height: 1.15rem;
+    max-width: 16rem;
+  }
+
+  &--body {
+    min-height: 12rem;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes post-detail-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-detail__skeleton {
+    animation: none;
+  }
+}

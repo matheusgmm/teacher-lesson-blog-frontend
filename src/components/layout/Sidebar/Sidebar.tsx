@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import BrandLogo from '@/components/ui/BrandLogo/BrandLogo';
 import Avatar from '@/components/ui/Avatar/Avatar';
 import Icon from '@/components/ui/Icon/Icon';
@@ -22,6 +22,7 @@ function Sidebar() {
     closeMobile,
   } = useSidebar();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isLeaving, setIsLeaving] = useState(false);
 
   const compact = collapsed && !peeking;
@@ -124,9 +125,13 @@ function Sidebar() {
                 <NavLink
                   to={item.to}
                   end={item.end}
-                  className={({ isActive }) =>
-                    `sidebar__link${isActive ? ' is-active' : ''}`
-                  }
+                  className={({ isActive }) => {
+                    const active = item.to === '/posts'
+                      ? isActive || /^\/posts\/\d+$/.test(location.pathname)
+                      : isActive;
+
+                    return `sidebar__link${active ? ' is-active' : ''}`;
+                  }}
                   onClick={dismissFlyouts}
                   aria-label={compact ? item.label : undefined}
                   title={compact ? item.label : item.description}

@@ -23,4 +23,14 @@
   &__description {
     color: var(--color-text-muted);
   }
+
+  a {
+    width: fit-content;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

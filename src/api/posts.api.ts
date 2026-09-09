@@ -1,6 +1,6 @@
 import { http } from '@/api/http-client';
-import type { ApiPaginated } from '@/types/api';
-import type { ListPostsParams, Post } from '@/types/post';
+import type { ApiPaginated, ApiSuccess } from '@/types/api';
+import type { CreatePostPayload, ListPostsParams, Post } from '@/types/post';
 import { toQueryString } from '@/utils/query-string';
 
 export function listPosts(params: ListPostsParams = {}, signal?: AbortSignal) {
@@ -17,4 +17,19 @@ export function listPosts(params: ListPostsParams = {}, signal?: AbortSignal) {
       signal,
     },
   );
+}
+
+export function getPost(id: number, signal?: AbortSignal) {
+  return http<ApiSuccess<Post>>(`/api/post/${id}`, {
+    method: 'GET',
+    signal,
+  });
+}
+
+export function createPost(payload: CreatePostPayload, signal?: AbortSignal) {
+  return http<ApiSuccess<Post>>('/api/post', {
+    method: 'POST',
+    body: payload,
+    signal,
+  });
 }

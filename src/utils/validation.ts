@@ -1,4 +1,8 @@
 export const MIN_PASSWORD_LENGTH = 6;
+export const POST_TITLE_MIN = 3;
+export const POST_TITLE_MAX = 191;
+export const POST_DESCRIPTION_MIN = 20;
+export const POST_DESCRIPTION_MAX = 8000;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -59,4 +63,40 @@ export function validatePasswordConfirm(
 
 export function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
+}
+
+export function validatePostTitle(title: string): string | undefined {
+  const value = title.trim();
+
+  if (!value) {
+    return 'Informe o título da aula.';
+  }
+
+  if (value.length < POST_TITLE_MIN) {
+    return `O título precisa ter pelo menos ${POST_TITLE_MIN} caracteres.`;
+  }
+
+  if (value.length > POST_TITLE_MAX) {
+    return `O título pode ter no máximo ${POST_TITLE_MAX} caracteres.`;
+  }
+
+  return undefined;
+}
+
+export function validatePostDescription(description: string): string | undefined {
+  const value = description.trim();
+
+  if (!value) {
+    return 'Escreva o conteúdo da aula.';
+  }
+
+  if (value.length < POST_DESCRIPTION_MIN) {
+    return `O conteúdo precisa ter pelo menos ${POST_DESCRIPTION_MIN} caracteres.`;
+  }
+
+  if (value.length > POST_DESCRIPTION_MAX) {
+    return `O conteúdo pode ter no máximo ${POST_DESCRIPTION_MAX} caracteres.`;
+  }
+
+  return undefined;
 }

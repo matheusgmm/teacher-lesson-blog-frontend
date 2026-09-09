@@ -58,6 +58,10 @@ export function getHomePath(role: UserRole): string {
 }
 
 export function getTitleForPath(pathname: string): string {
+  if (/^\/posts\/\d+$/.test(pathname)) {
+    return 'Aula';
+  }
+
   const exact = NAV_ITEMS.find((item) => item.to === pathname);
 
   if (exact) {

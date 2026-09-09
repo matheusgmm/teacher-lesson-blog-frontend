@@ -24,3 +24,8 @@ export type ListPostsParams = {
   page?: number;
   limit?: number;
 };
+
+export type CreatePostPayload = {
+  title: string;
+  description: string;
+};

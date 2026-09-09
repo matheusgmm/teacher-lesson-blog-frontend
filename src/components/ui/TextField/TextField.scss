@@ -53,6 +53,31 @@
     }
   }
 
+  &__control--multiline {
+    align-items: stretch;
+    min-height: 16rem;
+  }
+
+  &__textarea {
+    width: 100%;
+    min-height: 16rem;
+    padding: var(--space-3) var(--space-4);
+    border: 0;
+    background: transparent;
+    resize: vertical;
+    line-height: var(--line-height-body);
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--color-text-muted);
+      opacity: 0.8;
+    }
+  }
+
   &__hint,
   &__error {
     margin: 0;

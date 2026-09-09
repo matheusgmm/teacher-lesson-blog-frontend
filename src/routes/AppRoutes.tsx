@@ -3,6 +3,7 @@ import AppLayout from '@/components/layout/AppLayout/AppLayout';
 import HomePage from '@/pages/HomePage/HomePage';
 import LoginPage from '@/pages/LoginPage/LoginPage';
 import NewPostPage from '@/pages/NewPostPage/NewPostPage';
+import PostDetailPage from '@/pages/PostDetailPage/PostDetailPage';
 import PostsPage from '@/pages/PostsPage/PostsPage';
 import RegisterPage from '@/pages/RegisterPage/RegisterPage';
 import UsersPage from '@/pages/UsersPage/UsersPage';
@@ -27,6 +28,8 @@ function AppRoutes() {
             <Route path="/posts/new" element={<NewPostPage />} />
             <Route path="/users" element={<UsersPage />} />
           </Route>
+
+          <Route path="/posts/:id" element={<PostDetailPage />} />
         </Route>
       </Route>
 
