@@ -8,6 +8,7 @@ type TextAreaProps = {
   onChange: (value: string) => void;
   error?: string;
   hint?: string;
+  compact?: boolean;
 } & Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'id' | 'value' | 'onChange'>;
 
 function TextArea({
@@ -17,6 +18,7 @@ function TextArea({
   onChange,
   error,
   hint,
+  compact = false,
   rows = 10,
   ...rest
 }: TextAreaProps) {
@@ -31,7 +33,7 @@ function TextArea({
       </label>
 
       <div
-        className={`text-field__control text-field__control--multiline${error ? ' text-field__control--error' : ''}`}
+        className={`text-field__control text-field__control--multiline${compact ? ' text-field__control--compact' : ''}${error ? ' text-field__control--error' : ''}`}
       >
         <textarea
           id={id}

@@ -3,6 +3,8 @@ export const POST_TITLE_MIN = 3;
 export const POST_TITLE_MAX = 191;
 export const POST_DESCRIPTION_MIN = 20;
 export const POST_DESCRIPTION_MAX = 8000;
+export const COMMENT_CONTENT_MIN = 3;
+export const COMMENT_CONTENT_MAX = 1000;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -112,6 +114,24 @@ export function validatePostDescription(description: string): string | undefined
 
   if (value.length > POST_DESCRIPTION_MAX) {
     return `O conteúdo pode ter no máximo ${POST_DESCRIPTION_MAX} caracteres.`;
+  }
+
+  return undefined;
+}
+
+export function validateCommentContent(content: string): string | undefined {
+  const value = content.trim();
+
+  if (!value) {
+    return 'Escreva o comentário.';
+  }
+
+  if (value.length < COMMENT_CONTENT_MIN) {
+    return `O comentário precisa ter pelo menos ${COMMENT_CONTENT_MIN} caracteres.`;
+  }
+
+  if (value.length > COMMENT_CONTENT_MAX) {
+    return `O comentário pode ter no máximo ${COMMENT_CONTENT_MAX} caracteres.`;
   }
 
   return undefined;

@@ -58,6 +58,10 @@
     min-height: 16rem;
   }
 
+  &__control--compact {
+    min-height: 6.5rem;
+  }
+
   &__textarea {
     width: 100%;
     min-height: 16rem;
@@ -76,6 +80,10 @@
       color: var(--color-text-muted);
       opacity: 0.8;
     }
+  }
+
+  &__control--compact &__textarea {
+    min-height: 6.5rem;
   }
 
   &__hint,

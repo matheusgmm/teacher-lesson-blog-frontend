@@ -32,6 +32,23 @@ export function formatLongDate(value: string): string {
   return formatted.charAt(0).toUpperCase() + formatted.slice(1);
 }
 
+const dateTimeFormatter = new Intl.DateTimeFormat('pt-BR', {
+  day: 'numeric',
+  month: 'short',
+  hour: '2-digit',
+  minute: '2-digit',
+});
+
+export function formatDateTime(value: string): string {
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return '';
+  }
+
+  return dateTimeFormatter.format(date);
+}
+
 export function excerpt(text: string, maxLength = 220): string {
   const normalized = text.replace(/\s+/g, ' ').trim();
 

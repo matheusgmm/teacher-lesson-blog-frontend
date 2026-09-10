@@ -8,6 +8,7 @@ type PaginationProps = {
   total: number;
   limit: number;
   disabled?: boolean;
+  label?: string;
   onPageChange: (page: number) => void;
 };
 
@@ -17,6 +18,7 @@ function Pagination({
   total,
   limit,
   disabled = false,
+  label = 'Paginação',
   onPageChange,
 }: PaginationProps) {
   if (total === 0 && totalPages <= 1) {
@@ -29,7 +31,7 @@ function Pagination({
   const atEnd = current >= totalPages;
 
   return (
-    <nav className="pagination" aria-label="Paginação">
+    <nav className="pagination" aria-label={label}>
       <p className="pagination__summary">{getRangeLabel(current, limit, total)}</p>
 
       {totalPages > 1 ? (

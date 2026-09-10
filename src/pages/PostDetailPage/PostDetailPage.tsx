@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { deletePost } from '@/api/posts.api';
+import CommentThread from '@/components/comments/CommentThread/CommentThread';
 import Alert from '@/components/ui/Alert/Alert';
 import Button from '@/components/ui/Button/Button';
 import EmptyState from '@/components/ui/EmptyState/EmptyState';
@@ -145,6 +146,8 @@ function PostDetailPage() {
       </header>
 
       <div className="post-detail__body">{post.description}</div>
+
+      <CommentThread postId={post.id} />
 
       {canManage ? (
         <div className="post-detail__manage">

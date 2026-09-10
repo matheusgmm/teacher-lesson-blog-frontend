@@ -1,0 +1,10 @@
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.comment-form__actions {
+  display: flex;
+  justify-content: flex-end;
+}
