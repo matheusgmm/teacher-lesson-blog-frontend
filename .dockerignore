@@ -1,0 +1,17 @@
+node_modules
+dist
+.git
+.github
+.vscode
+.cursor
+.idea
+.env
+.env.*
+!.env.example
+coverage
+*.md
+*.log
+.eslintcache
+*.tsbuildinfo
+.vite
+.DS_Store

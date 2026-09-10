@@ -11,11 +11,6 @@ export type NavItem = {
   end?: boolean;
 };
 
-/**
- * Fonte única das rotas autenticadas.
- * USER: só lê postagens (GET /api/post).
- * ADMIN: CRUD de postagens + gestão da comunidade.
- */
 export const NAV_ITEMS: NavItem[] = [
   {
     to: '/',
